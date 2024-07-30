@@ -8,6 +8,11 @@ const PORT = 8080;
 const PUBLIC_FOLDER = __dirname + "/export/web"
 
 const server = http.createServer((request, response) => {
+    if (path.normalize(decodeURI(uri)) !== decodeURI(uri)) {
+        response.statusCode = 403;
+        response.end();
+        return;
+    }
   const uri = url.parse(request.url).pathname
   let filename = path.join(PUBLIC_FOLDER, uri)
 
